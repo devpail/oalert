@@ -20,6 +20,7 @@ public class OcrUtil {
 
 
     public static String ocrImg(String imagePath){
+        logger.info("开始识别验证码");
         //1.读取图像
         BufferedImage bufferedImage = null;
         try {

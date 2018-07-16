@@ -124,8 +124,8 @@ public class ValiUtils {
         data = data.replace("\\\"","\"");
         data = data.replace("\"{","{");
         data = data.replace("}\"","}");
-        logger.info(data);
-        WriteUtils.writeResult(data);
+        //logger.info(data);
+        WriteUtils.writeResult(data, WriteUtils.checkinDataFilePath);
         JSONObject jsonObject = JSON.parseObject(data);
         JSONArray jsonArray = jsonObject.getJSONArray("eventinfo");
         JSONObject checkInfo = null;
