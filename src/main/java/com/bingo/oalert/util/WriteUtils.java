@@ -1,11 +1,15 @@
 package com.bingo.oalert.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteUtils {
 
+    private static Logger logger = LoggerFactory.getLogger(WriteUtils.class);
 
     public static void writeResult(String data) throws IOException {
         File file =new File("result"+System.currentTimeMillis()+".txt");
@@ -20,6 +24,6 @@ public class WriteUtils {
         fileWritter.write(data);
         fileWritter.close();
 
-        System.out.println("Done");
+        logger.info("数据已经写入文件");
     }
 }

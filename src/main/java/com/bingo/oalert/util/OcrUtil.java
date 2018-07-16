@@ -1,9 +1,12 @@
 package com.bingo.oalert.util;
 
+import com.bingo.oalert.OalertApplication;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.util.ImageHelper;
 import net.sourceforge.tess4j.util.LoadLibs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -12,6 +15,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class OcrUtil {
+
+    private static Logger logger = LoggerFactory.getLogger(OcrUtil.class);
+
 
     public static String ocrImg(String imagePath){
         //1.读取图像
