@@ -20,16 +20,14 @@ public class SmsUtils {
         return new JsonReqClient();
     }
 
-    /**发送没有打卡考勤提醒*/
-    public static boolean sendNoCheckinAlertSms(String mobile){
+    /*发送消息通用方法*/
+    public static boolean sendSms(String mobile, String templateid, String smsMsg){
         String sid = "a66036bd729830dd48f7dbd1899d1316";
         String token = "1dd052184f312be7449cb334686b3f65";
         String appid = "ddb5e974a5b645659617bd3ed71e9f6d";
-        String templateid = "350873";
-        String param = "";
         String uid = "";
         try {
-            String result=InstantiationRestAPI().sendSms(sid, token, appid, templateid, param, mobile, uid);
+            String result=InstantiationRestAPI().sendSms(sid, token, appid, templateid, smsMsg, mobile, uid);
             logger.info("Response content is: " + result);
             JSONObject jsonObject = JSON.parseObject(result);
             String code = jsonObject.getString("code");
@@ -40,6 +38,23 @@ public class SmsUtils {
             e.printStackTrace();
         }
         return false;
+    }
+    /**发送没有打卡考勤提醒*/
+    public static void sendNoCheckinAlertSms(String mobile){
+        String templateid = "350873";
+        sendSms(mobile,templateid,"");
+    }
+
+    /**发送没有打卡考勤提醒*/
+    public static void sendNoCheckinAlertSms(String mobile, String paramMsg){
+        String templateid = "359545";
+        sendSms(mobile,templateid,paramMsg);
+    }
+
+    /**发送打卡考勤检测失败提醒*/
+    public static void sendCheckinFailedSms(String mobile, String paramMsg){
+        String templateid = "441300";
+        sendSms(mobile,templateid,paramMsg);
     }
 
     public static void sendSms(String sid, String token, String appid, String templateid, String param, String mobile, String uid){

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.bingo.oalert.util.HttpUtils;
 import com.bingo.oalert.util.OAReqUtils;
+import com.bingo.oalert.util.PersonConst;
 import com.bingo.oalert.util.ValiUtils;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -17,6 +18,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Map;
 
 @Service
 public class OAReqService {
@@ -62,9 +65,18 @@ public class OAReqService {
 
 
 
-   public String getOACheckinData(CloseableHttpClient httpClient) throws IOException {
+   public String getOACheckinData(CloseableHttpClient httpClient, boolean getAll) throws IOException {
        // 创建httpget.
-       HttpGet httpGet = new HttpGet(OAReqUtils.getCheckDataUrl);
+       Calendar calendar = Calendar.getInstance();
+       calendar.get(Calendar.YEAR);
+       int year = calendar.get(Calendar.YEAR);
+       int month = calendar.get(Calendar.MONTH)+1;
+       String empId = PersonConst.ZHANGZHB_EMPID;
+       if(getAll){
+           empId = "";
+       }
+       String url = String.format("%s?empId=%s&dateYear=%d&dateMonth=%d", OAReqUtils.getCheckDataUrl, empId, year, month);
+       HttpGet httpGet = new HttpGet(url);
        logger.info("executing request " + httpGet.getURI());
        // 执行get请求.
        CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
@@ -85,5 +97,11 @@ public class OAReqService {
        logger.info("打卡结果:" + valiResult);
        return valiResult;
    }
+
+    public Map<String, String> getNoCheckinEmpMap(String data) throws Exception {
+        /**解析数据发送提醒*/
+        return ValiUtils.getNoCheckinEmpMap(data);
+
+    }
 
 }

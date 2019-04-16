@@ -16,8 +16,12 @@ public class OAReqUtils {
     public static String isWorkDayUrl = "https://api.goseek.cn/Tools/holiday";
     public static String valImgUrl = "https://124.133.230.229:8080/OA_WEB/validateImg.do";
     public static String loginCheckUrl = "https://124.133.230.229:8080/OA_WEB/loginCheck.do";
-    public static String getCheckDataUrl="https://124.133.230.229:8080/OA_WEB/checkinCal/getPageData.do?empId=716e7770-1470-4561-8e61-6cbff4e297d3&dateYear=2018&dateMonth=7";
+    public static String getCheckDataUrl="https://124.133.230.229:8080/OA_WEB/checkinCal/getPageData.do";
     public static String imgPath = "valcode.jpg";
+
+    static{
+
+    }
 
     public static List<NameValuePair> getLoginParam(){
         String userId = "zhangzhaobing";

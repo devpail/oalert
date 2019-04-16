@@ -57,7 +57,7 @@ public class HttpUtils {
                     return true;
                 }
             });
-            sslsf = new SSLConnectionSocketFactory(builder.build(), new String[]{"SSLv2Hello", "SSLv3", "TLSv1", "TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
+            sslsf = new SSLConnectionSocketFactory(builder.build(), new String[]{"SSLv3", "TLSv1", "TLSv1.2"}, null, NoopHostnameVerifier.INSTANCE);
             Registry<ConnectionSocketFactory> registry = RegistryBuilder.<ConnectionSocketFactory>create()
                     .register(HTTP, new PlainConnectionSocketFactory())
                     .register(HTTPS, sslsf)
