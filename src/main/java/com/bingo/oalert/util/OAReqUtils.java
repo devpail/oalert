@@ -13,7 +13,7 @@ public class OAReqUtils {
     private static Logger logger = LoggerFactory.getLogger(OAReqUtils.class);
 
     // 创建CookieStore实例
-    public static String isWorkDayUrl = "https://api.goseek.cn/Tools/holiday";
+    public static String isWorkDayUrl = "http://api.goseek.cn/Tools/holiday";
     public static String valImgUrl = "https://124.133.230.229:8080/OA_WEB/validateImg.do";
     public static String loginCheckUrl = "https://124.133.230.229:8080/OA_WEB/loginCheck.do";
     public static String getCheckDataUrl="https://124.133.230.229:8080/OA_WEB/checkinCal/getPageData.do";
