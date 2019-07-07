@@ -19,7 +19,7 @@ public abstract class CheckService {
     private OAReqService oaReqService;
 
     public Object checkMain(){
-        String result="";
+        String result;
         CloseableHttpClient httpClient = null;
         Date dateTime = new Date();
         try {
@@ -39,7 +39,7 @@ public abstract class CheckService {
             if(!checkResult){
                 result = "今天不需要打卡，少侠无须担心！";
                 logger.info(result);
-                //return result;
+                return result;
             }
             logger.info("今天不是休息日");
         } catch (Exception e) {

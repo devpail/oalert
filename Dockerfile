@@ -1,6 +1,33 @@
-FROM ubuntu18/jdk8-tesseract:19.7.3
+FROM ubuntu/jdk12/tesseract:1.0
+# 下面是一些创建者的基本信息
+MAINTAINER devpail (devpail@163.com)
 VOLUME /tmp
-ENV TZ=Asia/Shanghai
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-ADD target/oalert-0.0.1-SNAPSHOT.jar oalert.jar
-ENTRYPOINT ["java","-jar","/oalert.jar"]
+# 更新安装源
+# RUN apt-get update
+# 更新时区
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN export DEBIAN_FRONTEND=noninteractive
+# RUN apt-get install -y tzdata
+RUN dpkg-reconfigure --frontend noninteractive tzdata
+# 安装图像识别软件
+# RUN apt-get install -y tesseract-ocr
+ADD target/oalert-0.0.1-SNAPSHOT.jar /app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
+
+
+
+#FROM ubuntu/jdk12:latest
+## 下面是一些创建者的基本信息
+#MAINTAINER devpail (devpail@163.com)
+#VOLUME /tmp/oalert
+## 更新安装源
+#RUN apt-get update
+## 更新时区
+#RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+#RUN export DEBIAN_FRONTEND=noninteractive
+#RUN apt-get install -y tzdata
+#RUN dpkg-reconfigure --frontend noninteractive tzdata
+## 安装图像识别软件
+#RUN apt-get install -y tesseract-ocr
+#ADD target/oalert-0.0.1-SNAPSHOT.jar /tmp/oalert/app.jar
+#ENTRYPOINT ["java","-jar","/tmp/oalert/app.jar"]
