@@ -69,7 +69,7 @@ public class ValiUtils {
     }
 
 
-    public static boolean isWorkDay(Date date) throws Exception {
+    public static Boolean isWorkDay(Date date) throws Exception {
         CloseableHttpClient httpClient = HttpUtils.getHttpClient();
         String url = OAReqUtils.isWorkDayUrl + "?date=" + dateFormat.format(date);
         HttpGet httpGet = new HttpGet(url);
@@ -78,8 +78,8 @@ public class ValiUtils {
         CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
         logger.info("--------------------------------------");
         int statusCode = httpResponse.getStatusLine().getStatusCode();
+        String result = EntityUtils.toString(httpResponse.getEntity());
         if (statusCode == HttpStatus.SC_OK) {
-            String result = EntityUtils.toString(httpResponse.getEntity());
             JSONObject jsonObject = JSON.parseObject(result);
             int data = jsonObject.getIntValue("data");
             if(data==0){
@@ -87,6 +87,10 @@ public class ValiUtils {
             }
         } else {
             logger.info("查询数据失败啦");
+            logger.error("statusCode:"+statusCode);
+            logger.error(result);
+            return null;
+            //throw new HttpRequestException("节假日接口数据请求失败！");
         }
         httpResponse.close();
         return false;
