@@ -1,4 +1,6 @@
 FROM ubuntu/jdk12/tesseract:1.0
+# 中文乱码
+ENV LANG C.UTF-8
 # 下面是一些创建者的基本信息
 MAINTAINER devpail (devpail@163.com)
 VOLUME /tmp

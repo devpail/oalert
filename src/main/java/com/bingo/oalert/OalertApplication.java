@@ -1,6 +1,6 @@
 package com.bingo.oalert;
 
-import com.bingo.oalert.service.CheckService;
+import com.bingo.oalert.service.BaseCheckService;
 import com.bingo.oalert.service.OAReqService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +29,10 @@ public class OalertApplication {
     private OAReqService oaReqService;
 
     @Autowired
-    private CheckService checkMeService;
+    private BaseCheckService checkMeService;
 
     @Autowired
-    private CheckService checkAllService;
+    private BaseCheckService checkAllService;
 
     @RequestMapping(value="")
     @ResponseBody
