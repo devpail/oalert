@@ -11,9 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 
 
-public abstract class CheckService {
+/**
+* @Description 检查打卡服务基础类
+* @ClassName BaseCheckService.java
+* @CreateTime 19-7-8 下午2:33
+* @Author bingo
+* @Version 1.0.0
+*/
+public abstract class BaseCheckService {
 
-    private static Logger logger = LoggerFactory.getLogger(CheckService.class);
+    private static Logger logger = LoggerFactory.getLogger(BaseCheckService.class);
 
     @Autowired
     private OAReqService oaReqService;
@@ -62,7 +69,7 @@ public abstract class CheckService {
             }
             /*登录成功后进行后续检查*/
             if(loginSuccess){
-                result = (String) doCheck(httpClient,oaReqService);
+                result = doCheck(httpClient,oaReqService);
             }else{
                 result = "我试了" + ValiUtils.loginCount + "次都没登录上OA，少侠速速亲自登录OA进行检查！";
                 SmsUtils.sendCheckinFailedSms("15098929019","登录OA失败");
@@ -75,6 +82,13 @@ public abstract class CheckService {
         return result;
     }
 
-    public abstract Object doCheck(CloseableHttpClient httpClient, OAReqService oaReqService) throws Exception;
+    /**
+     * 检查信息接口，等待子类实现
+     * @param httpClient
+     * @param oaReqService
+     * @return 检查结果，一句描述
+     * @throws Exception
+     */
+    public abstract String doCheck(CloseableHttpClient httpClient, OAReqService oaReqService) throws Exception;
 
 }

@@ -8,14 +8,21 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
+/**
+* @Description 测试自己是否打卡
+* @ClassName CheckMeService.java
+* @CreateTime 19-7-8 下午2:31
+* @Author bingo
+* @Version 1.0.0
+*/
 @Service
-public class CheckMeService extends CheckService {
+public class CheckMeService extends BaseCheckService {
 
     private static Logger logger = LoggerFactory.getLogger(CheckMeService.class);
 
 
     @Override
-    public Object doCheck(CloseableHttpClient httpClient, OAReqService oaReqService) throws IOException {
+    public String doCheck(CloseableHttpClient httpClient, OAReqService oaReqService) throws IOException {
         String result;
         logger.info("登陆成功，开始获取打卡数据");
         /*获取打卡数据*/
